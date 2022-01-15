@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Identificador de idade</title>
+<style>
+header{
+     text-align:center;
+    }
+body{
+     background-color: rgb(32, 73, 80);
+     font: normal Arial; color:antiquewhite;
+    }
+section{
+    
+    background-color:antiquewhite;
+    border-radius: 10px;
+    padding: 10px;
+    width: 450px;
+    margin: auto;
+    color: black;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.493); 
+ }
+footer{
+    font-style: italic;
+    text-align:center;
+            }
+</style>
+</head>
+<body>
+   <header>
+      <h1>Indendificador de Idade</h1>
+   </header>
+    <section>
+        <div>
+            <p>Ano de Nascimento:
+            <input type="number" name="anoString" id="anoString" min="0"></p>
+            <p> Sexo:
+            <input type="radio" name="sexoRadio" id="male" checked> 
+            <label for="male">Masculino</label>
+            <input type="radio" name="sexoRadio" id="female">
+            <label for="female">Feminino</label>
+            </p>
+              <p><input type="button" value="Verificar" onclick="verificar()">
+            </p>
+        </div>
+            <div id="result">Preencha os dados.</div>
+    </section>
+      <script>
+        function verificar() {
+            var data = new Date()
+            var anoAtual = data.getFullYear()
+            var anoFormulario = document.getElementById("anoString")
+            var resultado = document.querySelector('div#result')
+            if (anoFormulario.value.length == 0 || anoFormulario.value > anoAtual){ //length significa (comprimento,duração) 
+            window.alert("[ERRO] Verifique os dados e tente novamente.")
+        }
+        else {
+            var sexoFormulario = document.getElementsByName('sexoRadio')
+            var idade = anoAtual - anoFormulario.value
+            var genero = "" //string vazia
+            var img = document.createElement("img")
+            img.setAttribute('id', 'foto')
+        if(sexoFormulario[0].checked) { //entre a variavel e o "checked vai um "." e nao um espaço
+            genero = "Homem"
+                if(idade >=0 && idade <12){//Criança 
+                    img.setAttribute('src', 'crianca-menino.jpg')
+                }else if (idade >=12 && idade < 25){//Jovem
+                    img.setAttribute('src', 'jovem-menino.jpg')
+                }else if (idade >=25 && idade < 55){//Adulto
+                    img.setAttribute('src', 'adulto-menino.jpg')
+                }else {//Idoso
+                    img.setAttribute('src','idoso-menino.jpg')
+                }
+        }
+        else if(sexoFormulario[1].checked) {
+            genero = "Mulher"
+                if(idade >=0 && idade <12){//Criança 
+                    img.setAttribute('src', 'crianca-menina.jpg')
+            }else if (idade >= 12 && idade < 25){//Jovem
+                    img.setAttribute('src', 'jovem-menina.jpg')
+            }else if (idade >= 25 && idade < 55){//Adulto
+                    img.setAttribute('src', 'adulto-menina.jpg')
+            }else{//Idoso
+                    img.setAttribute('src', 'idoso-menina.jpg')
+            } 
+        }
+            resultado.innerHTML = `Detectamos ${genero} com ${idade} anos de idade`
+            resultado.style.textAlign = 'center'
+            resultado.appendChild(img)
+        }
+        }
+       </script>
+<footer>
+    <P>&copy; Ryan Ramos</P>
+</footer>
+</body>
+</html>
